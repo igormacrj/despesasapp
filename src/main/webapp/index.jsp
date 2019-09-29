@@ -14,14 +14,14 @@
 		<h2>Sistema de Controle de Despesas Pessoais</h2>
 	</div>
 	<br />
-	<a href="todos/list">Categorias</a>
+	<a href="categorias/list">Categorias</a>
 	<br />
-	<a href="todos/form">Criar nova categoria</a>
+	<a href="caregorias/form">Criar nova categoria</a>
 	<br />
 	<br />
-	<a href="usuarios/list">Despesas</a>
+	<a href="despesas/list">Despesas</a>
 	<br />
-	<a href="usuarios/form">Criar nova despesa</a>
+	<a href="despesas/form">Criar nova despesa</a>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
