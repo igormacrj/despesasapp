@@ -16,7 +16,7 @@
 	<br />
 	<a href="categorias/list">Categorias</a>
 	<br />
-	<a href="caregorias/form">Criar nova categoria</a>
+	<a href="categorias/form">Criar nova categoria</a>
 	<br />
 	<br />
 	<a href="despesas/list">Despesas</a>
