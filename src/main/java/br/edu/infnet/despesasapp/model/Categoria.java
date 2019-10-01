@@ -1,9 +1,14 @@
 package br.edu.infnet.despesasapp.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,11 +24,24 @@ public class Categoria {
 		Tipo = tipo;
 	}
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String Nome;
 	private String Tipo;	
 	
+	@OneToMany(mappedBy="categoria", targetEntity = Movimentacao.class, 
+			fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Movimentacao> movimentacoes;
+	
+	public List<Movimentacao> getMovimentacoes() {
+		return movimentacoes;
+	}
+
+	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
+		this.movimentacoes = movimentacoes;
+	}
+
 	public int getId() {
 		return id;
 	}

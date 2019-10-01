@@ -5,7 +5,7 @@
 	<persistence-unit name="mitjava">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.edu.infnet.todoapp.app.model.Categoria</class>
-		<class>br.edu.infnet.todoapp.app.model.Despesa</class>		
+		<class>br.edu.infnet.todoapp.app.model.Movimentacao</class>		
 	</persistence-unit>
 </persistence>
 

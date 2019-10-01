@@ -19,9 +19,9 @@
 	<a href="categorias/form">Criar nova categoria</a>
 	<br />
 	<br />
-	<a href="despesas/list">Despesas</a>
+	<a href="movimentacoes/list">Movimentações</a>
 	<br />
-	<a href="despesas/form">Criar nova despesa</a>
+	<a href="movimentacoes/form">Criar nova movimentação</a>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -12,25 +12,27 @@
 
 
 <meta charset="UTF-8">
-<title>Lista de Categorias</title>
+<title>Lista de Movimentações</title>
 </head>
 <body>
-	<h2>Lista de Categorias</h2>
-	<h3><a href="<c:url value="/categorias/form" />" >Criar nova categoria</a></h3>
+	<h2>Lista de Movimentações</h2>
+	<h3><a href="<c:url value="/movimentacoes/form" />" >Criar nova movimentação</a></h3>
 
 	<table class="table table-striped">
 		<tr>
-			<th>NOME</th>
-			<th>TIPO</th>
+			<th>CATEGORIA</th>
+<!-- 			<th>DATA</th> -->
+			<th>VALOR (R$)</th>
 			<th></th>
 		</tr>
-		<c:forEach var="categoria" items="${listaCategorias}">
+		<c:forEach var="movimentacao" items="${listaMovimentacoes}">
 			<tr>
-				<td>${categoria.nome}</td>
-				<td>${categoria.tipo}</td>
-				<td><a href="<c:url value="/categorias/edit/${categoria.id}" />">
+				<td>${movimentacao.categoria.nome}</td>
+<%-- 				<td>${movimentacao.data}</td> --%>
+				<td>${movimentacao.valor}</td>
+				<td><a href="<c:url value="/movimentacoes/edit/${movimentacao.id}" />">
 						<button type="button" class="btn btn-outline-warning btn-sm">Editar</button>
-				</a> <a href="<c:url value="/categorias/delete/${categoria.id}" />">
+				</a> <a href="<c:url value="/movimentacoes/delete/${movimentacao.id}" />">
 						<button type="button" class="btn btn-outline-danger btn-sm">Excluir</button>
 				</a></td>
 			</tr>
