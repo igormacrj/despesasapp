@@ -21,14 +21,14 @@
 	<table class="table table-striped">
 		<tr>
 			<th>CATEGORIA</th>
-<!-- 			<th>DATA</th> -->
+ 			<th>DATA</th> 
 			<th>VALOR (R$)</th>
 			<th></th>
 		</tr>
 		<c:forEach var="movimentacao" items="${listaMovimentacoes}">
 			<tr>
 				<td>${movimentacao.categoria.nome}</td>
-<%-- 				<td>${movimentacao.data}</td> --%>
+ 				<td>${movimentacao.dataHoraString}</td>
 				<td>${movimentacao.valor}</td>
 				<td><a href="<c:url value="/movimentacoes/edit/${movimentacao.id}" />">
 						<button type="button" class="btn btn-outline-warning btn-sm">Editar</button>

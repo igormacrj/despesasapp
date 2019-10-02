@@ -1,7 +1,5 @@
 package br.edu.infnet.despesasapp.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +7,8 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Table(name = "tb_movimentacao")
@@ -20,7 +20,21 @@ public class Movimentacao {
 	@ManyToOne
 	@JoinColumn(name="categoriaId")
 	private Categoria categoria;	
-	//private LocalDate data;	
+	private Timestamp dataHora;	
+	
+	public Timestamp getDataHora() {
+		return dataHora;
+	}
+	
+	public String getDataHoraString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		return sdf.format(dataHora);
+	}
+
+	public void setDataHora(Timestamp dataHora) {
+		this.dataHora = dataHora;
+	}
+
 	private Float valor;
 	
 	public Float getValor() {
@@ -34,10 +48,10 @@ public class Movimentacao {
 	public Movimentacao(){
 	}
 
-	public Movimentacao(Categoria categoria, /*LocalDate data*/ Float valor) {
+	public Movimentacao(Categoria categoria, Timestamp dataHora, Float valor) {
 		super();
 		this.categoria = categoria;
-//		this.data = data;
+		this.dataHora = dataHora;
 		this.valor = valor;
 	}
 
@@ -57,11 +71,5 @@ public class Movimentacao {
 		this.categoria = categoria;
 	}
 
-//	public LocalDate getData() {
-//		return data;
-//	}
-//
-//	public void setData(LocalDate data) {
-//		this.data = data;
-//	}
+
 }
