@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,8 +20,17 @@ public class Movimentacao {
 	private int id;	
 	@ManyToOne
 	@JoinColumn(name="categoriaId")
-	private Categoria categoria;	
+	private Categoria categoria;
+	private Integer idCategoria;
 	private Timestamp dataHora;	
+	
+	public Integer getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
+	}
 	
 	public Timestamp getDataHora() {
 		return dataHora;
@@ -48,13 +58,20 @@ public class Movimentacao {
 	public Movimentacao(){
 	}
 
-	public Movimentacao(Categoria categoria, Timestamp dataHora, Float valor) {
+//	public Movimentacao(Categoria categoria, /*Timestamp dataHora,*/ Float valor) {
+//		super();
+//		this.categoria = categoria;
+//		//this.dataHora = dataHora;
+//		this.valor = valor;
+//	}
+
+	public Movimentacao(Integer idCategoria, Timestamp dataHora, Float valor) {
 		super();
-		this.categoria = categoria;
+		this.idCategoria = idCategoria;
 		this.dataHora = dataHora;
 		this.valor = valor;
 	}
-
+	
 	public int getId() {
 		return id;
 	}

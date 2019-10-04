@@ -24,26 +24,18 @@
 			<tr>
 				<td> <label for="nome">Categoria</label> </td>
 				<td> 
-<!-- 				     <select name="categoria" id="categoria"> -->
-<%-- 						<option value="${movimentacao.categoria}">Categoria 1</option> --%>
-<%-- 						<option value="${movimentacao.categoria}">Categoria 2</option> --%>
-<%-- 						<option value="${movimentacao.categoria}">Categoria 3</option> --%>
-<%-- 						<option value="${movimentacao.categoria}">Categoria 4</option> --%>
-<%-- 						<option value="${movimentacao.categoria}">Categoria X</option> --%>
-<!-- 					</select> -->
-					
-					<select name="categoria" id="categoria">
-    					<option>Selecione...</option>
-    					<c:forEach var="categoria" items="${categoria.getAll}">
-        					<option>${categoria.nome}</option> <!-- acessando o bean, neste caso, o atributo nome do fornecedor-->
+					<select name="idCategoria" id="categoria">
+    					<c:forEach var="categoria" items="${listaCategorias}">
+        					<option value="${categoria.id}">${categoria.nome}</option> 
     					</c:forEach>
-					</select>				
-					
+					</select>									
 				</td>
 			</tr>
 			<tr>
 				<td><label for="tipo">Valor(R$)</label></td>
-				<td><input type="text" value="${movimentacao.valor}" name="valor" id="valor" size="10"></td>
+ 				<td>
+ 				<input type="text" value="${movimentacao.valor}" name="valor" id="valor" size="10">
+ 				</td>
 			</tr>
 		</table>
 		<br /> 

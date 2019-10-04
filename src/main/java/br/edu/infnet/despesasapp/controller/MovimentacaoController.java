@@ -1,5 +1,6 @@
 package br.edu.infnet.despesasapp.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,58 +10,76 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.edu.infnet.despesasapp.model.Categoria;
 import br.edu.infnet.despesasapp.model.Movimentacao;
 
 @Controller
 public class MovimentacaoController {
 
 	@Autowired
-	private MovimentacaoService service;
+	private MovimentacaoService serviceMovimentacao;
+
+	@Autowired
+	private CategoriaService serviceCategoria;	
+	
 	
 	@RequestMapping(value = "/movimentacoes/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		List<Movimentacao> movimentacoes = service.getMovimentacoes();
+		List<Movimentacao> movimentacoes = serviceMovimentacao.getMovimentacoes();
 		model.addAttribute("listaMovimentacoes", movimentacoes);
 		return "movimentacoes/list";
 	}
 	
 	@RequestMapping(value = "/movimentacoes/form" , method = RequestMethod.GET)
 	public String viewForm(Model model) {
+		List<Categoria> categorias = serviceCategoria.getCategorias();
+		model.addAttribute("listaCategorias", categorias);
 		return "movimentacoes/form";
 	}
 	
-	
 	@RequestMapping(value = "/movimentacoes/add", method = RequestMethod.POST)
 	public String save(Model model, Movimentacao movimentacao) {
-		service.persite(movimentacao);
+		movimentacao.setCategoria(serviceCategoria.getCategoria(movimentacao.getIdCategoria().toString()));
+		movimentacao.setDataHora(new Timestamp(System.currentTimeMillis()));
+		serviceMovimentacao.persite(movimentacao);
 		return "redirect:/movimentacoes/list";
 	}
 	
 	@RequestMapping(value = "/movimentacoes/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable("id") String id, Model model) {
-		Movimentacao movimentacao = service.getMovimentacao(id);
+		Movimentacao movimentacao = serviceMovimentacao.getMovimentacao(id);
 		model.addAttribute("movimentacao", movimentacao);
 		return "movimentacoes/edit";
 	}
 	
 	@RequestMapping(value = "/movimentacoes/update", method = RequestMethod.POST)
 	public String update(Model model, Movimentacao movimentacao) {
-		service.update(movimentacao);
+		serviceMovimentacao.update(movimentacao);
 		return "redirect:/movimentacoes/list";
 	}
 	
 	@RequestMapping(value = "/movimentacoes/delete/{id}", method = RequestMethod.GET)
 	public String delete(Movimentacao movimentacao) {
-		service.delete(movimentacao.getId());
+		serviceMovimentacao.delete(movimentacao.getId());
 		return "redirect:/movimentacoes/list";
 	}
 	
-	public MovimentacaoService getService() {
-		return service;
+	public MovimentacaoService getServiceMovimentacao() {
+		return serviceMovimentacao;
 	}
 
-	public void setService(MovimentacaoService service) {
-		this.service = service;
+	public void setServiceMovimentacao(MovimentacaoService serviceMovimentacao) {
+		this.serviceMovimentacao = serviceMovimentacao;
 	}
+
+	public CategoriaService getServiceCategoria() {
+		return serviceCategoria;
+	}
+
+	public void setServiceCategoria(CategoriaService serviceCategoria) {
+		this.serviceCategoria = serviceCategoria;
+	}
+	
+	
 	
 }
