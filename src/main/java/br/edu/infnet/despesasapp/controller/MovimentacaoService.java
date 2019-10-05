@@ -1,5 +1,6 @@
 package br.edu.infnet.despesasapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,6 +32,32 @@ public void setDao(MovimentacaoDao dao) {
 	@Transactional(propagation = Propagation.NEVER)
 	public List<Movimentacao> getMovimentacoes() {
 		return dao.getAll();
+	}
+	
+	@Transactional(propagation = Propagation.NEVER)
+	public List<Movimentacao> getMovimentacoesReceita() {
+		List<Movimentacao> movimentacao = dao.getAll();
+		List<Movimentacao> movimentacaoReceita = new ArrayList<Movimentacao>(); 
+		for (Movimentacao mov: movimentacao) {
+			if (mov.getCategoria().getTipo().equals("Receita")) {
+				movimentacaoReceita.add(mov);
+			}	
+		}	
+		return movimentacaoReceita;
+		//return dao.getAll();
+	}
+	
+	@Transactional(propagation = Propagation.NEVER)
+	public List<Movimentacao> getMovimentacoesDespesa() {
+		List<Movimentacao> movimentacao = dao.getAll();
+		List<Movimentacao> movimentacaoDespesa = new ArrayList<Movimentacao>(); 
+		for (Movimentacao mov: movimentacao) {
+			if (mov.getCategoria().getTipo().equals("Despesa")) {
+				movimentacaoDespesa.add(mov);
+			}	
+		}	
+		return movimentacaoDespesa;
+		//return dao.getAll();
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)

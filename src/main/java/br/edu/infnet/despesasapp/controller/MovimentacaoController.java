@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import br.edu.infnet.despesasapp.model.Categoria;
 import br.edu.infnet.despesasapp.model.Movimentacao;
 
@@ -27,6 +26,13 @@ public class MovimentacaoController {
 	public String list(Model model) {
 		List<Movimentacao> movimentacoes = serviceMovimentacao.getMovimentacoes();
 		model.addAttribute("listaMovimentacoes", movimentacoes);
+		
+		List<Movimentacao> movimentacoesReceita = serviceMovimentacao.getMovimentacoesReceita();
+		model.addAttribute("listaMovimentacoesReceita", movimentacoesReceita);
+		
+		List<Movimentacao> movimentacoesDespesa = serviceMovimentacao.getMovimentacoesDespesa();
+		model.addAttribute("listaMovimentacoesDespesa", movimentacoesDespesa);
+		
 		return "movimentacoes/list";
 	}
 	

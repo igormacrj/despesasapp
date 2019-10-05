@@ -58,13 +58,6 @@ public class Movimentacao {
 	public Movimentacao(){
 	}
 
-//	public Movimentacao(Categoria categoria, /*Timestamp dataHora,*/ Float valor) {
-//		super();
-//		this.categoria = categoria;
-//		//this.dataHora = dataHora;
-//		this.valor = valor;
-//	}
-
 	public Movimentacao(Integer idCategoria, Timestamp dataHora, Float valor) {
 		super();
 		this.idCategoria = idCategoria;

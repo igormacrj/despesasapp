@@ -17,7 +17,8 @@
 <body>
 	<h2>Lista de Movimentações</h2>
 	<h3><a href="<c:url value="/movimentacoes/form" />" >Criar nova movimentação</a></h3>
-
+    <br><br>
+    <h3>Receitas</h3>
 	<table class="table table-striped">
 		<tr>
 			<th>CATEGORIA</th>
@@ -25,7 +26,30 @@
 			<th>VALOR (R$)</th>
 			<th></th>
 		</tr>
-		<c:forEach var="movimentacao" items="${listaMovimentacoes}">
+		<c:forEach var="movimentacao" items="${listaMovimentacoesReceita}">
+			<tr>
+				<td>${movimentacao.categoria.nome}</td>
+ 				<td>${movimentacao.dataHoraString}</td>
+				<td>${movimentacao.valor}</td>
+				<td><a href="<c:url value="/movimentacoes/edit/${movimentacao.id}" />">
+						<button type="button" class="btn btn-outline-warning btn-sm">Editar</button>
+				</a> <a href="<c:url value="/movimentacoes/delete/${movimentacao.id}" />">
+						<button type="button" class="btn btn-outline-danger btn-sm">Excluir</button>
+				</a></td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	<br><br>
+    <h3>Despesas</h3>
+	<table class="table table-striped">
+		<tr>
+			<th>CATEGORIA</th>
+ 			<th>DATA</th> 
+			<th>VALOR (R$)</th>
+			<th></th>
+		</tr>
+		<c:forEach var="movimentacao" items="${listaMovimentacoesDespesa}">
 			<tr>
 				<td>${movimentacao.categoria.nome}</td>
  				<td>${movimentacao.dataHoraString}</td>
