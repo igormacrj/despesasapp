@@ -33,6 +33,12 @@ public class MovimentacaoController {
 		List<Movimentacao> movimentacoesDespesa = serviceMovimentacao.getMovimentacoesDespesa();
 		model.addAttribute("listaMovimentacoesDespesa", movimentacoesDespesa);
 		
+		Float valorTotalDespesas = serviceMovimentacao.getValorTotalDespesas();
+		model.addAttribute("valorTotalDespesas", valorTotalDespesas);
+		
+		Float valorTotalReceitas = serviceMovimentacao.getValorTotalReceitas();
+		model.addAttribute("valorTotalReceitas", valorTotalReceitas);
+				
 		return "movimentacoes/list";
 	}
 	
@@ -55,11 +61,15 @@ public class MovimentacaoController {
 	public String edit(@PathVariable("id") String id, Model model) {
 		Movimentacao movimentacao = serviceMovimentacao.getMovimentacao(id);
 		model.addAttribute("movimentacao", movimentacao);
+		List<Categoria> categorias = serviceCategoria.getCategorias();
+		model.addAttribute("listaCategorias", categorias);
 		return "movimentacoes/edit";
 	}
 	
 	@RequestMapping(value = "/movimentacoes/update", method = RequestMethod.POST)
 	public String update(Model model, Movimentacao movimentacao) {
+		movimentacao.setCategoria(serviceCategoria.getCategoria(movimentacao.getIdCategoria().toString()));
+		//NÃO EDITAR, MANTER DATAHORA ORIGINAL...  movimentacao.setDataHora(new Timestamp(System.currentTimeMillis()));
 		serviceMovimentacao.update(movimentacao);
 		return "redirect:/movimentacoes/list";
 	}

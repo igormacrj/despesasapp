@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
-
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 
 <!DOCTYPE html>
 <html>
@@ -15,33 +13,30 @@
 	crossorigin="anonymous">
 
 <meta charset="UTF-8">
-<title>Adicionar Movimentação</title>
+<title>Editar Movimentação</title>
 </head>
 <body>
-	<h2>Adicionar Movimentação</h2>
-	<form action="<c:url value="/movimentacoes/add" />" method="post">
+	<h2>Editar Movimentação</h2>
+	<form action="<c:url value="/movimentacoes/update" />" method="post">
 		<table>
 			<tr>
-				<td> <label for="nome">Categoria</label> </td>
-				<td> 
-					<select name="idCategoria" id="categoria">
-    					<c:forEach var="categoria" items="${listaCategorias}">
-        					<option value="${categoria.id}">${categoria.nome}</option> 
-    					</c:forEach>
-					</select>									
-				</td>
+				<td><label for="nome">Categoria</label></td>
+				<td><select name="idCategoria" id="categoria">
+						<c:forEach var="categoria" items="${listaCategorias}">
+							<option value="${categoria.id}">${categoria.nome}</option>
+						</c:forEach>
+				</select></td>
 			</tr>
 			<tr>
 				<td><label for="tipo">Valor(R$)</label></td>
- 				<td>
- 				<input type="text" value="${movimentacao.valor}" name="valor" id="valor" size="10">
- 				</td>
+				<td><input type="text" value="${movimentacao.valor}"
+					name="valor" id="valor" size="10"></td>
 			</tr>
 		</table>
-		<br /> 
-		<input type="submit" value="Salvar">
-	</form>   
-
+		<input type="hidden" value="${movimentacao.dataHora}" name="dataHora" id="dataHora">
+		<input type="hidden" value="${movimentacao.id}" name="id" id="id">
+		<br /> <input type="submit" value="Salvar">
+	</form>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

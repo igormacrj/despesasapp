@@ -65,6 +65,4 @@ public class Categoria {
 	public void setTipo(String tipo) {
 		Tipo = tipo;
 	}
-
-	
 }

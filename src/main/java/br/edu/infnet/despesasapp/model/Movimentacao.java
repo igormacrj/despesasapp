@@ -19,7 +19,7 @@ public class Movimentacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;	
 	@ManyToOne
-	@JoinColumn(name="categoriaId")
+	@JoinColumn(name="CategoriaId")
 	private Categoria categoria;
 	private Integer idCategoria;
 	private Timestamp dataHora;	

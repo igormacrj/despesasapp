@@ -14,50 +14,65 @@ import br.edu.infnet.despesasapp.model.persistence.MovimentacaoDao;
 
 @Service
 public class MovimentacaoService {
- 
-@Autowired
-   private MovimentacaoDao dao;
-	
-	public MovimentacaoDao getDao() {
-	return dao;
-}
 
-public void setDao(MovimentacaoDao dao) {
-	this.dao = dao;
-}
+	@Autowired
+	private MovimentacaoDao dao;
+	
+	private float valorTotalReceitas;
+	private float valorTotalDespesas;
+	
+	@Transactional(propagation = Propagation.NEVER)
+	public float getValorTotalReceitas() {
+		return valorTotalReceitas;
+	}
+	
+	@Transactional(propagation = Propagation.NEVER)
+	public float getValorTotalDespesas() {
+		return valorTotalDespesas;
+	}
+
+	public MovimentacaoDao getDao() {
+		return dao;
+	}
+
+	public void setDao(MovimentacaoDao dao) {
+		this.dao = dao;
+	}
 
 	public MovimentacaoService() {
 	}
-	
+
 	@Transactional(propagation = Propagation.NEVER)
 	public List<Movimentacao> getMovimentacoes() {
 		return dao.getAll();
 	}
-	
+
 	@Transactional(propagation = Propagation.NEVER)
 	public List<Movimentacao> getMovimentacoesReceita() {
+		valorTotalReceitas = 0;
 		List<Movimentacao> movimentacao = dao.getAll();
-		List<Movimentacao> movimentacaoReceita = new ArrayList<Movimentacao>(); 
-		for (Movimentacao mov: movimentacao) {
+		List<Movimentacao> movimentacaoReceita = new ArrayList<Movimentacao>();
+		for (Movimentacao mov : movimentacao) {
 			if (mov.getCategoria().getTipo().equals("Receita")) {
 				movimentacaoReceita.add(mov);
-			}	
-		}	
+				valorTotalReceitas += mov.getValor();
+			}
+		}
 		return movimentacaoReceita;
-		//return dao.getAll();
 	}
-	
+
 	@Transactional(propagation = Propagation.NEVER)
 	public List<Movimentacao> getMovimentacoesDespesa() {
+		valorTotalDespesas = 0;
 		List<Movimentacao> movimentacao = dao.getAll();
-		List<Movimentacao> movimentacaoDespesa = new ArrayList<Movimentacao>(); 
-		for (Movimentacao mov: movimentacao) {
+		List<Movimentacao> movimentacaoDespesa = new ArrayList<Movimentacao>();
+		for (Movimentacao mov : movimentacao) {
 			if (mov.getCategoria().getTipo().equals("Despesa")) {
 				movimentacaoDespesa.add(mov);
-			}	
-		}	
+				valorTotalDespesas += mov.getValor();
+			}
+		}
 		return movimentacaoDespesa;
-		//return dao.getAll();
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -75,7 +90,7 @@ public void setDao(MovimentacaoDao dao) {
 		Objects.requireNonNull(id, "vai pra lá com esse nulo");
 		return dao.getOne(Integer.valueOf(id));
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(Integer id) {
 		dao.delete(id);
